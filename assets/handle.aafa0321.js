@@ -1,0 +1,1 @@
+import{d as e,c as n,o,_ as r}from"./index.0b8b560c.js";const a=e({__name:"handle",setup(t){return(s,c)=>(o(),n("div",null,"12"))}}),l=r(a,[["__file","/home/runner/work/auto-answer-frontend/auto-answer-frontend/src/views/cooker/handle.vue"]]);export{l as default};
