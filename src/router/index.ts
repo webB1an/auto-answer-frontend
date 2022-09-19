@@ -71,7 +71,7 @@ const router = createRouter({
   routes: [...constantRoutes, ...asyncRoutes]
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   NProgress.start();
   const title = to.meta?.title;
 
