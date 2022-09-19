@@ -1,0 +1,24 @@
+
+:root {
+  --custom-el-bg-color: #fff;
+  --custom-bg-color: #e9ebf0;
+  --custom-icon-color: #000;
+  ---custom-icon-hover-color: #f6f6f6;
+  --custom-tag-view-container-border-color: #eee;
+  --custom-tag-view-bg-color: #fff;
+  --custom-tag-view-border-color: #d9d9d9;
+  --custom-contextmenu-text-color: #505050;
+
+}
+
+.dark {
+  --custom-el-bg-color: #151515;
+  --custom-bg-color: #000;
+  --custom-icon-color: #fff;
+  ---custom-icon-hover-color: rgba(0,0,0,.7);
+  --custom-tag-view-container-border-color: #151515;
+  --custom-tag-view-bg-color: #151515;
+  --custom-tag-view-border-color: #4e4e4e;
+  --custom-contextmenu-text-color: #505050;
+}
+
