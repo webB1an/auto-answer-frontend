@@ -1,1 +1,0 @@
-import{d as e,c as n,o,_ as r}from"./index.0b8b560c.js";const t=e({__name:"index",setup(s){return(a,c)=>(o(),n("div",null,"11"))}}),d=r(t,[["__file","/home/runner/work/auto-answer-frontend/auto-answer-frontend/src/views/cooker/index.vue"]]);export{d as default};
