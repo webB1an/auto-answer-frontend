@@ -6,7 +6,7 @@
     "build": "run-p type-check build-only",
     "preview": "vite preview --port 4173",
     "github": "vue-tsc --noEmit && vite build --mode github",
-    "build-only": "vite build",
+    "build-only": "vite build --mode production",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
