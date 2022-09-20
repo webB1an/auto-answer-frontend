@@ -13,9 +13,9 @@ const __APP_INFO__ = {
     name,
     version,
     dependencies,
-    devDependencies,
+    devDependencies
   },
-  lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+  lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss')
 };
 
 // https://vitejs.dev/config/
@@ -23,18 +23,18 @@ export default defineConfig({
   base: './',
   envDir: resolve(__dirname, 'env'),
   define: {
-    __APP_INFO__: JSON.stringify(__APP_INFO__),
+    __APP_INFO__: JSON.stringify(__APP_INFO__)
   },
   plugins: [
     vue(),
     createSvgIconsPlugin({
       iconDirs: [path.resolve(process.cwd(), 'src/icons')],
-      symbolId: 'icon-[dir]-[name]',
-    }),
+      symbolId: 'icon-[dir]-[name]'
+    })
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
-  },
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  }
 });

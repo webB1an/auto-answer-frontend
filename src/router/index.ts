@@ -41,11 +41,11 @@ export const asyncRoutes: RouteRecordRaw[] = [
   },
   {
     path: '/cooker',
-    redirect: '/cooker/index',
+    redirect: '/cooker/list',
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: 'list',
         name: 'Cooker',
         component: () => import('@/views/cooker/index.vue'),
         meta: { icon: 'cooker', title: '集成灶' }
@@ -54,13 +54,15 @@ export const asyncRoutes: RouteRecordRaw[] = [
         path: 'add',
         hidden: true,
         name: 'CookerAdd',
-        component: () => import('@/views/cooker/handle.vue')
+        component: () => import('@/views/cooker/handle.vue'),
+        meta: { title: '新建-集成灶' }
       },
       {
-        path: 'editor',
+        path: 'editor/:id',
         hidden: true,
         name: 'CookerEditor',
-        component: () => import('@/views/cooker/handle.vue')
+        component: () => import('@/views/cooker/handle.vue'),
+        meta: { title: '编辑-集成灶' }
       }
     ]
   }
