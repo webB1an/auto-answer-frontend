@@ -12,4 +12,4 @@ export const setBooleanStorage = (key: string, value: boolean) =>
   localStorage.setItem(key, String(value));
 
 export const getBooleanStorage = (key: string) =>
-  localStorage.getItem(key) === 'true' ? true : false;
+  localStorage.getItem(key) === 'true' || localStorage.getItem(key) === null ? true : false;

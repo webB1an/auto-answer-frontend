@@ -43,6 +43,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     path: '/cooker',
     redirect: '/cooker/list',
     component: Layout,
+    meta: { title: '集成灶' },
     children: [
       {
         path: 'list',
