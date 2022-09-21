@@ -1,4 +1,4 @@
-name: deploy
+name: docker
 
 on:
   push:
@@ -7,22 +7,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Node.js v14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14.x'
-      
-      # - name: Install
-      #   run: npm install # 安装依赖
-
-      # - name: Build
-      #   run: npm run docker # 打包
-      #   env:
-      #     NODE_OPTIONS: '--max_old_space_size=4096'
-
       - name: SSH
         uses: appleboy/ssh-action@master
         with:
@@ -33,8 +19,6 @@ jobs:
           script: |
              cd /home/auto-answer-frontend/
              git pull
-             npm install
-             npm run docker --max_old_space_size=4096
              docker stop auto-answer-frontend
              docker rm auto-answer-frontend
              docker rmi auto-answer-frontend
