@@ -28,7 +28,7 @@ jobs:
         with:
           host: 139.9.212.113
           username: root
-          key: ${{ secrets.SSHKEY }}
+          password: ${{ secrets.PASS }}
           port: 22
           script: |
              cd /home/auto-answer-frontend/
