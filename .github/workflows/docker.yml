@@ -1,0 +1,37 @@
+name: deploy
+
+on:
+  push:
+    branches: [master] # master 分支有 push 时触发
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js v14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      
+      - name: Install
+        run: npm install # 安装依赖
+
+      - name: Build
+        run: npm run docker # 打包
+        env:
+          NODE_OPTIONS: '--max_old_space_size=4096'
+
+      - name: SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: 139.9.212.113
+          username: root
+          key: ${{ secrets.SSHKEY }}
+          port: 22
+          script: |
+             cd /home/auto-answer-frontend/
+             git pull
+             docker build -t auto-answer-frontend .
+             docker run -p 3000:80 -d --name auto-answer-frontend auto-answer-frontend
