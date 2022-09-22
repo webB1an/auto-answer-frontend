@@ -113,8 +113,8 @@
   };
 
   const { copy } = useClipboard();
-  console.log();
   const clipboardAccess = usePermission('clipboard-write');
+  console.log(unref(clipboardAccess));
   const generateMd = () => {
     generateCookerMd().then((res) => {
       if (unref(clipboardAccess) === 'granted') return copy(res.data);
