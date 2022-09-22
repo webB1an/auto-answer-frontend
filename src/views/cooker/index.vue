@@ -65,10 +65,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { ref, unref } from 'vue';
   import { useRouter } from 'vue-router';
   import { getList, delCooker, generateCookerMd } from '@/api/cooker';
-  import { useClipboard } from '@vueuse/core';
+  import { useClipboard, usePermission } from '@vueuse/core';
   import { ElMessage } from 'element-plus';
   import type { Cooker } from '@/api/models/cookerModels';
 
@@ -112,12 +112,12 @@
     getPageList();
   };
 
-  const { copy, isSupported } = useClipboard();
-  // const clipboardAccess = usePermission('clipboard-write');
+  const { copy } = useClipboard();
+  const clipboardAccess = usePermission('clipboard-write');
   // console.log(unref(clipboardAccess));
   const generateMd = () => {
     generateCookerMd().then((res) => {
-      if (isSupported) return copy(res.data);
+      if (unref(clipboardAccess) === 'granted') return copy(res.data);
 
       md.value = res.data;
       dialogVisible.value = true;
