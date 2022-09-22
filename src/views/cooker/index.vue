@@ -52,6 +52,15 @@
       :total="total"
       @pagination="handlePageChange"
     />
+
+    <el-dialog v-model="dialogVisible" title="复制生成内容" width="80%">
+      <el-input v-model="md" type="textarea" rows="10" />
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button type="primary" @click="dialogVisible = false">关闭</el-button>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -78,6 +87,9 @@
 
   const tableData = ref<Cooker[]>([]);
 
+  const dialogVisible = ref(false);
+  const md = ref('');
+
   const getPageList = () => {
     getList({
       ...query,
@@ -100,10 +112,13 @@
     getPageList();
   };
 
-  const { copy } = useClipboard();
+  const { copy, isSupported } = useClipboard();
   const generateMd = () => {
     generateCookerMd().then((res) => {
-      copy(res.data);
+      if (isSupported) return copy(res.data);
+
+      md.value = res.data;
+      dialogVisible.value = true;
     });
   };
   const addCooker = () => {
