@@ -68,7 +68,9 @@
         <el-row>
           <el-col :span="8">
             <el-form-item label="排风量" prop="wind">
-              <el-input v-model.number="form.wind" />
+              <el-input v-model.number="form.wind">
+                <template #append>m³/min</template>
+              </el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -76,7 +78,9 @@
         <el-row>
           <el-col :span="8">
             <el-form-item label="火力" prop="fire">
-              <el-input v-model="form.fire" />
+              <el-input v-model="form.fire">
+                <template #append>kW</template>
+              </el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -84,7 +88,9 @@
         <el-row>
           <el-col :span="8">
             <el-form-item label="风压" prop="pa">
-              <el-input v-model.number="form.pa" />
+              <el-input v-model.number="form.pa">
+                <template #append>Pa</template>
+              </el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -171,7 +177,7 @@
     name: [{ required: true, message: '请输入名称', trigger: 'blur' }],
     price: [{ type: 'number', required: true, message: '请输入价格', trigger: 'blur' }],
     url: [{ required: true, message: '请输入 url', trigger: 'blur' }],
-    pic: [{ required: true, message: '请输入图片链接', trigger: 'blur' }],
+    // pic: [{ required: true, message: '请输入图片链接', trigger: 'blur' }],
     wind: [{ type: 'number', required: true, message: '请输入排风量', trigger: 'blur' }],
     fire: [{ required: true, validator: validatorNumber, trigger: 'blur' }],
     pa: [{ type: 'number', required: true, message: '请输入风压', trigger: 'blur' }]
