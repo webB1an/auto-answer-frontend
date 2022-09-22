@@ -76,7 +76,7 @@
         <el-row>
           <el-col :span="8">
             <el-form-item label="火力" prop="fire">
-              <el-input v-model.number="form.fire" />
+              <el-input v-model="form.fire" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -125,35 +125,17 @@
 
 <script lang="ts" setup>
   import { ref, reactive } from 'vue';
-  import { useRoute } from 'vue-router';
+  import { useRoute, useRouter } from 'vue-router';
   import { ElMessage } from 'element-plus';
+  import { addCooker, getCookerDetail, editorCooker } from '@/api/cooker';
+  import { sortOpts } from './constant';
   import type { FormInstance, FormRules } from 'element-plus';
 
-  import { addCooker, getCookerDetail, editorCooker } from '@/api/cooker';
-
   const route = useRoute();
+  const router = useRouter();
 
   const id = route.params?.id as string;
   const title = id ? '编辑' : '新建';
-
-  const sortOpts = [
-    {
-      label: '蒸箱款',
-      value: 1
-    },
-    {
-      label: '烤箱款',
-      value: 2
-    },
-    {
-      label: ' 消毒柜款',
-      value: 3
-    },
-    {
-      label: '蒸烤一体款',
-      value: 4
-    }
-  ];
 
   const formRef = ref<FormInstance>();
 
@@ -175,6 +157,14 @@
     ]
   });
 
+  let validatorNumber = (_rule, value, callback) => {
+    if (!value) return callback(new Error('请输入内容'));
+    if (!Number(value)) return callback(new Error('请输入数字值'));
+    let reg = /((^[1-9]\d*)|^0)(\.\d{0,2}){0,1}$/;
+    if (!reg.test(value)) return callback(new Error('请输入正确数字'));
+    callback();
+  };
+
   const rules = reactive<FormRules>({
     sort: [{ type: 'number', required: true, message: '请选择类型', trigger: 'change' }],
     brand: [{ required: true, message: '请输入品牌名', trigger: 'blur' }],
@@ -183,7 +173,7 @@
     url: [{ required: true, message: '请输入 url', trigger: 'blur' }],
     pic: [{ required: true, message: '请输入图片链接', trigger: 'blur' }],
     wind: [{ type: 'number', required: true, message: '请输入排风量', trigger: 'blur' }],
-    fire: [{ type: 'number', required: true, message: '请输入火力', trigger: 'blur' }],
+    fire: [{ required: true, validator: validatorNumber, trigger: 'blur' }],
     pa: [{ type: 'number', required: true, message: '请输入风压', trigger: 'blur' }]
   });
 
@@ -222,7 +212,7 @@
           message: res.msg,
           type
         });
-        init(id);
+        router.back();
       } else {
         console.log('error submit!');
         return false;

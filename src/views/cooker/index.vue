@@ -25,7 +25,11 @@
     </el-card>
 
     <el-table class="mt20" :data="tableData" border>
-      <el-table-column prop="sort" label="分类" align="center" />
+      <el-table-column label="分类" align="center">
+        <template #default="scope">
+          {{ getOptLabel(scope.row.sort) }}
+        </template>
+      </el-table-column>
       <el-table-column prop="brand" label="品牌" align="center" />
       <el-table-column prop="name" label="名称" align="center" />
       <el-table-column prop="price" label="价格" align="center" />
@@ -69,9 +73,9 @@
   import { useRouter } from 'vue-router';
   import { getList, delCooker, generateCookerMd } from '@/api/cooker';
   import { useClipboard, usePermission } from '@vueuse/core';
-  import { ElMessage } from 'element-plus';
+  import { ElMessage, ElMessageBox } from 'element-plus';
+  import { getOptLabel } from './constant';
   import type { Cooker } from '@/api/models/cookerModels';
-
   import Pagination from '@/components/Pagination/index.vue';
 
   // hook
@@ -135,15 +139,23 @@
   };
   const deleteCooker = (row: Cooker) => {
     if (!row.id) return;
-    delCooker(row.id).then((res) => {
-      console.log(res);
-      const type = res.code === 90001 ? 'success' : 'error';
-      ElMessage({
-        message: res.msg,
-        type
-      });
-      getPageList();
-    });
+    ElMessageBox.confirm('是否确认删除？', '提示', {
+      confirmButtonText: '删除',
+      cancelButtonText: '取消',
+      type: 'warning'
+    })
+      .then(() => {
+        delCooker(row.id as string).then((res) => {
+          console.log(res);
+          const type = res.code === 90001 ? 'success' : 'error';
+          ElMessage({
+            message: res.msg,
+            type
+          });
+          getPageList();
+        });
+      })
+      .catch(() => {});
   };
 
   getPageList();
