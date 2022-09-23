@@ -23,4 +23,4 @@ jobs:
              docker rm auto-answer-frontend
              docker rmi auto-answer-frontend
              docker build -t auto-answer-frontend .
-             docker run -p 3000:80 -d --name auto-answer-frontend auto-answer-frontend
+             docker run -p 80:80 -d --name auto-answer-frontend auto-answer-frontend
