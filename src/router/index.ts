@@ -66,6 +66,34 @@ export const asyncRoutes: RouteRecordRaw[] = [
         meta: { title: '编辑-集成灶' }
       }
     ]
+  },
+  {
+    path: '/air',
+    redirect: '/air/list',
+    component: Layout,
+    meta: { title: '空调' },
+    children: [
+      {
+        path: 'list',
+        name: 'Air',
+        component: () => import('@/views/air/index.vue'),
+        meta: { icon: 'air', title: '空调' }
+      },
+      {
+        path: 'add',
+        hidden: true,
+        name: 'AirAdd',
+        component: () => import('@/views/air/handle.vue'),
+        meta: { title: '新建-空调' }
+      },
+      {
+        path: 'editor/:id',
+        hidden: true,
+        name: 'AirEditor',
+        component: () => import('@/views/air/handle.vue'),
+        meta: { title: '编辑-空调' }
+      }
+    ]
   }
 ];
 
