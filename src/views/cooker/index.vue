@@ -41,9 +41,15 @@
           <el-button link type="primary" size="small" @click="editorCooker(scope.row)">
             编辑
           </el-button>
-          <el-button link type="danger" size="small" @click="deleteCooker(scope.row)"
-            >删除</el-button
+          <el-button
+            v-if="mode === 'development'"
+            link
+            type="danger"
+            size="small"
+            @click="deleteCooker(scope.row)"
           >
+            删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -80,6 +86,8 @@
 
   // hook
   import usePagination from '@/hooks/usePagination';
+
+  console.log('ssss', import.meta.env.MODE);
 
   const router = useRouter();
   const { total, query } = usePagination();
@@ -157,6 +165,8 @@
       })
       .catch(() => {});
   };
+
+  const mode = ref(import.meta.env.MODE);
 
   getPageList();
 </script>
